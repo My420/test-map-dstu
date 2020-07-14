@@ -1,0 +1,19 @@
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.buttonContainer {
+  position: absolute;
+  top: -7%;
+  right: -7%;
+}

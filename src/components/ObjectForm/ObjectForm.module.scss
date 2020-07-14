@@ -1,0 +1,13 @@
+@import '../../sass/variables.scss';
+
+.container {
+  width: 400px;
+  padding: 20px;
+
+  background-color: $color-bg-main;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}

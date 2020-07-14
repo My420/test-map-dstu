@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from '../Map';
+import ScreenContainer from '../../containers/ScreenContainer';
 import styles from './App.module.scss';
 
 const App: React.FC = () => (
@@ -8,7 +8,7 @@ const App: React.FC = () => (
       <h1 className="visually-hidden">Карта парка ДГТУ</h1>
     </header>
     <main className={styles.main}>
-      <Map />
+      <ScreenContainer />
     </main>
     <footer />
   </div>

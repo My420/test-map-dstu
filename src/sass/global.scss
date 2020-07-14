@@ -1,0 +1,66 @@
+@import './variables.scss';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+legend,
+fieldset,
+blockquote,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  min-width: 320px;
+  background-color: white;
+  font-family: 'SFCompact', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: black;
+}
+
+input,
+textarea {
+  font-family: 'SFCompact', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  color: #1c1c1c;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #1c1c1c;
+  -webkit-box-shadow: 0 0 0px 1000px $color-bg-main inset;
+  transition: background-color 0s ease-in-out 0s;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type='checkbox'].visually-hidden,
+input[type='radio'].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
