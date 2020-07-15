@@ -33,7 +33,7 @@ const ObjectForm: React.FC<ObjectFormProps> = ({ coords, onSubmit }) => {
           rules={[
             {
               required: true,
-              message: 'Введите название объекта!',
+              message: 'Введите название метки!',
             },
           ]}
         >
