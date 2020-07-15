@@ -2,6 +2,7 @@ import React from 'react';
 import Map from '../Map';
 import ModalWindow from '../ModalWindow';
 import ObjectFormContainer from '../../containers/ObjectFormContainer';
+import ObjectListContainer from '../../containers/ObjectListContainer';
 
 export interface ScreenProps {
   coords: number[];
@@ -18,6 +19,7 @@ const Screen: React.FC<ScreenProps> = ({
     <ModalWindow isOpen={isModalOpen} onClose={toggleModalStatus}>
       <ObjectFormContainer coords={coords} callAfterSubmitFunc={toggleModalStatus} />
     </ModalWindow>
+    <ObjectListContainer />
   </>
 );
 
