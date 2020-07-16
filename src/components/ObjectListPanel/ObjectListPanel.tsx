@@ -1,6 +1,6 @@
 import React from 'react';
 import { RadioChangeEvent } from 'antd/lib/radio';
-import { ObjectList as List, SortValue } from '../types';
+import { ObjectList as List, SortValue } from '../../types';
 import ObjectList from '../ObjectList';
 import ObjectListFilter from '../ObjectListFilter';
 import styles from './ObjectListPanel.module.scss';

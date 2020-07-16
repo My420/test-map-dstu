@@ -1,5 +1,5 @@
 import { ObjectList } from '../ducks/ObjectList';
-import { SortValue } from '../components/types';
+import { SortValue } from '../types';
 import { SORT_VALUE_ASCENDING, SORT_VALUE_DESCENDING } from './constant';
 
 const sortObjectList = (list: ObjectList, type: SortValue): ObjectList => {

@@ -1,4 +1,4 @@
-import { ObjectList } from '../components/types';
+import { ObjectList } from '../types';
 import markSubstring from './markSubstring';
 import isSubstring from './isSubstring';
 import { SEARCH_MARK } from './constant';

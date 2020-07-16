@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { ObjectFormData } from '../types';
+import { ObjectFormData } from '../../types';
 import styles from './ObjectForm.module.scss';
 
 export interface ObjectFormProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import { ObjectListItem as Item } from '../types';
+import { ObjectListItem as Item } from '../../types';
 
 export interface ObjectListItemProps {
   data: Item;

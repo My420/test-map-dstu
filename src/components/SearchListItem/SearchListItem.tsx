@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import { ObjectListItem as Item } from '../types';
+import { ObjectListItem as Item } from '../../types';
 import { SEARCH_MARK } from '../../utils/constant';
 import styles from './SearchListItem.module.scss';
 

@@ -1,4 +1,4 @@
-import { SORT_VALUE_NONE, SORT_VALUE_ASCENDING, SORT_VALUE_DESCENDING } from '../../utils/constant';
+import { SORT_VALUE_NONE, SORT_VALUE_ASCENDING, SORT_VALUE_DESCENDING } from '../utils/constant';
 
 export interface ObjectFormData {
   title: string;

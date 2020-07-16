@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { RadioChangeEvent } from 'antd/lib/radio';
-import { SortValue } from '../../components/types';
+import { SortValue } from '../../types';
 import ObjectListPanel from '../../components/ObjectListPanel';
 import searchInObjectList from '../../utils/searchInObjectList';
 import { SORT_VALUE_NONE } from '../../utils/constant';

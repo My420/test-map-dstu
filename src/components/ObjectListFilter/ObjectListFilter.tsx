@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio/interface';
 import { SORT_VALUE_NONE, SORT_VALUE_ASCENDING, SORT_VALUE_DESCENDING } from '../../utils/constant';
-import { SortValue } from '../types';
+import { SortValue } from '../../types';
 import styles from './ObjectListFilter.module.scss';
 
 export interface ObjectListFilterProps {

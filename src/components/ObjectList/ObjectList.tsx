@@ -1,5 +1,5 @@
 import React from 'react';
-import { ObjectList as List } from '../types';
+import { ObjectList as List } from '../../types';
 import ObjectListItem from '../ObjectListItem';
 import styles from './ObjectList.module.scss';
 import SearchListItem from '../SearchListItem';

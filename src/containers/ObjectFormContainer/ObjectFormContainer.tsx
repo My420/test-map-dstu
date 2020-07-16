@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ObjectFormData } from '../../components/types';
+import { ObjectFormData } from '../../types';
 import ObjectForm from '../../components/ObjectForm';
 import { ActionType, addItemToList } from '../../ducks/ObjectList';
 
