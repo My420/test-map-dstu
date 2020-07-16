@@ -6,6 +6,7 @@ export const ADD_ITEM = 'OBJECT_LIST/ADD_ITEM';
 // types
 
 export interface ObjectListItem {
+  id: string;
   title: string;
   description: string;
   lon: number;

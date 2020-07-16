@@ -1,8 +1,10 @@
+@import '../../sass/variables.scss';
+
 .container {
   position: absolute;
   top: 10px;
   right: 10px;
   width: 300px;
   height: 500px;
-  border: 1px solid red;
+  background-color: $color-bg-main;
 }

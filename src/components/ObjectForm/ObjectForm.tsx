@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { ObjectFormData } from '../../types';
 import styles from './ObjectForm.module.scss';
+import generateID from '../../utils/generateID';
 
 export interface ObjectFormProps {
   coords: number[];
@@ -14,12 +15,15 @@ const ObjectForm: React.FC<ObjectFormProps> = ({ coords, onSubmit }) => {
 
   const onFinish = (values: Store) => {
     const [lon, lat] = coords;
-    const { title, description } = values;
+    const title = typeof values.title === 'string' ? values.title : 'error!';
+    const description = typeof values.description === 'string' ? values.description : '';
+    const id = generateID();
     onSubmit({
       lon,
       lat,
       title,
-      description: description || '',
+      description,
+      id,
     });
   };
 

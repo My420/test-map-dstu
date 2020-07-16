@@ -1,14 +1,16 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { SortValue } from '../../types';
 import ObjectListPanel from '../../components/ObjectListPanel';
 import searchInObjectList from '../../utils/searchInObjectList';
 import { SORT_VALUE_NONE } from '../../utils/constant';
 import sortObjectList from '../../utils/sortObjectList';
+import getObjectList from '../../ducks/ObjectList/selector';
 
 export interface ObjectListContainerProps {}
 
-const list = [
+/* const list = [
   {
     title: 'Test B',
     description: 'description1',
@@ -45,9 +47,10 @@ const list = [
     lon: 6,
     lat: 6,
   },
-];
+]; */
 
 const ObjectListContainer: React.FC<ObjectListContainerProps> = () => {
+  const list = useSelector(getObjectList);
   const [searchValue, setSearchValue] = useState('');
   const [sortValue, setSortValue] = useState<SortValue>(SORT_VALUE_NONE);
 
@@ -68,9 +71,9 @@ const ObjectListContainer: React.FC<ObjectListContainerProps> = () => {
   return (
     <ObjectListPanel
       data={dataWithSort}
-      onSearch={handleSearch}
       isSearchActive={isSearchActive}
       sortValue={sortValue}
+      onSearch={handleSearch}
       onSortChange={handleSortChange}
     />
   );
