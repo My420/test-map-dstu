@@ -1,9 +1,8 @@
 import React from 'react';
 import { Empty } from 'antd';
 import { ObjectList as List } from '../../types';
-import ObjectListItem from '../ObjectListItem';
 import styles from './ObjectList.module.scss';
-import SearchListItem from '../SearchListItem';
+import ObjectListItemContainer from '../../containers/ObjectListItemContainer';
 
 export interface ObjectListProps {
   data: List;
@@ -25,7 +24,7 @@ const ObjectList: React.FC<ObjectListProps> = ({ data, isSearchActive }) => {
       {!isEmpty
         && data.map((elem) => (
           <li className={styles.item} key={elem.id}>
-            {isSearchActive ? <SearchListItem data={elem} /> : <ObjectListItem data={elem} />}
+            <ObjectListItemContainer data={elem} isSearchActive={isSearchActive} />
           </li>
         ))}
     </ul>

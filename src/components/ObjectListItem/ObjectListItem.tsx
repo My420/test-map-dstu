@@ -9,8 +9,7 @@ export interface ObjectListItemProps {
 const ObjectListItem: React.FC<ObjectListItemProps> = ({ data }) => {
   console.log('Object List Item');
   return (
-    <Card size="small">
-      <h4>{data.title}</h4>
+    <Card size="small" type="inner" title={<h4>{data.title}</h4>} hoverable>
       <p>{data.description}</p>
     </Card>
   );

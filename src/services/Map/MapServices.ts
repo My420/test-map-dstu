@@ -35,6 +35,8 @@ interface MapMoveSubscriber {
 class MapServices {
   private popupId: string = '';
 
+  private view: View | null = null;
+
   private map: Map | null = null;
 
   private markerLayer: VectorLayer | null = null;
@@ -56,8 +58,13 @@ class MapServices {
     return feature;
   }
 
-  private createMap(id: string): void {
-    if (!this.map) {
+  private createMapWithView(id: string): void {
+    if (!this.map && !this.view) {
+      this.view = new View({
+        center: DSTU_COORDS,
+        zoom: 17,
+      });
+
       this.map = new Map({
         target: id,
         layers: [
@@ -65,10 +72,7 @@ class MapServices {
             source: new OSM(),
           }),
         ],
-        view: new View({
-          center: DSTU_COORDS,
-          zoom: 17,
-        }),
+        view: this.view,
       });
     }
   }
@@ -182,10 +186,23 @@ class MapServices {
     this.markerLayer?.getSource().addFeature(marker);
   }
 
+  moveViewToMarker(id: string, coords: Coordinate) {
+    const time = 1000;
+    this.view?.animate({
+      center: coords,
+      duration: time,
+    });
+    const timeoutId = setTimeout(() => {
+      this.popup?.setPosition(coords);
+      this.notifyOnMarkerClickSubscribers(id);
+      clearTimeout(timeoutId);
+    }, time + 100);
+  }
+
   init(id: string, popupId: string): void {
     this.popupId = popupId;
     if (!this.map) {
-      this.createMap(id);
+      this.createMapWithView(id);
       this.createMarkersLayer();
       this.createPopup();
       this.addLayers();
