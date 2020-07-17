@@ -1,0 +1,11 @@
+@import '../../sass/variables.scss';
+
+.popupPoint {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  position: absolute;
+  background-color: $color-bg-main;
+}

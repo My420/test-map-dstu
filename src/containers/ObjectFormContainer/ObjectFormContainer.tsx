@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { ObjectFormData } from '../../types';
 import ObjectForm from '../../components/ObjectForm';
-import { ActionType, addItemToList } from '../../ducks/ObjectList';
+import { ActionType, createUserObject, ReducerState } from '../../ducks/ObjectList';
 
 export interface FormContainerProps {
   coords: number[];
@@ -13,10 +13,10 @@ export interface FormContainerProps {
 const ObjectFormContainer: React.FC<FormContainerProps> = ({ coords, callAfterSubmitFunc }) => {
   console.log('OFormContainer');
 
-  const dispatch = useDispatch<Dispatch<ActionType>>();
+  const dispatch = useDispatch<ThunkDispatch<ReducerState, {}, ActionType>>();
 
   const handleSubmit = (data: ObjectFormData) => {
-    dispatch(addItemToList(data));
+    dispatch(createUserObject(data));
     if (callAfterSubmitFunc) callAfterSubmitFunc();
   };
 

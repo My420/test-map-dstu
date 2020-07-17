@@ -10,45 +10,6 @@ import getObjectList from '../../ducks/ObjectList/selector';
 
 export interface ObjectListContainerProps {}
 
-/* const list = [
-  {
-    title: 'Test B',
-    description: 'description1',
-    lon: 1,
-    lat: 1,
-  },
-  {
-    title: 'Test A',
-    description: 'description2',
-    lon: 2,
-    lat: 2,
-  },
-  {
-    title: 'Test E',
-    description: 'description3',
-    lon: 3,
-    lat: 3,
-  },
-  {
-    title: 'Test C',
-    description: 'description3',
-    lon: 4,
-    lat: 4,
-  },
-  {
-    title: 'Test F',
-    description: 'description3',
-    lon: 5,
-    lat: 5,
-  },
-  {
-    title: 'Test D',
-    description: 'description3',
-    lon: 6,
-    lat: 6,
-  },
-]; */
-
 const ObjectListContainer: React.FC<ObjectListContainerProps> = () => {
   const list = useSelector(getObjectList);
   const [searchValue, setSearchValue] = useState('');
@@ -57,9 +18,7 @@ const ObjectListContainer: React.FC<ObjectListContainerProps> = () => {
   const isSearchActive = !!searchValue;
 
   const dataWithSearch = searchInObjectList(list, searchValue);
-  console.log('with Search', dataWithSearch);
   const dataWithSort = sortObjectList(dataWithSearch, sortValue);
-  console.log('with Sort', dataWithSort);
 
   const handleSearch = useCallback((value: string) => setSearchValue(value), [setSearchValue]);
   const handleSortChange = useCallback((evt: RadioChangeEvent) => {

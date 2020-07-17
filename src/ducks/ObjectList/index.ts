@@ -1,3 +1,6 @@
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import mapService from '../../services/Map';
+
 // constant
 
 export const moduleName = 'OBJECT_LIST';
@@ -36,6 +39,15 @@ export const addItemToList = (item: ObjectListItem): AddItemAction => ({
 });
 
 // async action creator
+
+export const createUserObject = (
+  data: ObjectListItem,
+): ThunkAction<Promise<void>, ReducerState, {}, ActionType> => async (
+  dispatch: ThunkDispatch<ReducerState, {}, ActionType>,
+) => {
+  dispatch(addItemToList(data));
+  mapService.addMarker(data);
+};
 
 // reducer
 

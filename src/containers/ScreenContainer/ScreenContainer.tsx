@@ -6,24 +6,49 @@ export interface ScreenContainerProps {}
 
 const ScreenContainer: React.FC<ScreenContainerProps> = () => {
   const [isModalOpen, toggleModal] = useToggle(false);
-  const [coords, setState] = useState([0, 0]);
+  const [coords, setCoordsState] = useState([0, 0]);
+  const [isMarkerPopupOpen, setIsMarkerPopupOpen] = useState(false);
+  const [markerId, setMarkerId] = useState('');
 
-  const onMapClick = useCallback(
+  const handleMarkerClick = useCallback(
+    (id: string) => {
+      setIsMarkerPopupOpen(false);
+      setMarkerId(id);
+      setIsMarkerPopupOpen(true);
+    },
+    [setMarkerId, setIsMarkerPopupOpen],
+  );
+
+  const handleMapClick = useCallback(
     (newCoords: number[]): void => {
-      setState(newCoords);
+      setIsMarkerPopupOpen(false);
+      setCoordsState(newCoords);
       toggleModal();
     },
-    [setState, toggleModal],
+    [setCoordsState, toggleModal, setIsMarkerPopupOpen],
   );
+
+  const handleMapMove = useCallback((): void => setIsMarkerPopupOpen(false), [
+    setIsMarkerPopupOpen,
+  ]);
+
+  const handleMarkerPopupClose = useCallback((): void => setIsMarkerPopupOpen(false), [
+    setIsMarkerPopupOpen,
+  ]);
 
   console.log('screen container');
 
   return (
     <Screen
       coords={coords}
+      markerId={markerId}
       isModalOpen={isModalOpen}
+      isMarkerPopupOpen={isMarkerPopupOpen}
       toggleModalStatus={toggleModal}
-      onMapClick={onMapClick}
+      onMapClick={handleMapClick}
+      onMarkerClick={handleMarkerClick}
+      onMarkerPopupClose={handleMarkerPopupClose}
+      onMapMove={handleMapMove}
     />
   );
 };

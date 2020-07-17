@@ -1,5 +1,5 @@
 import { AppState } from '../../store';
-import { ObjectList } from '../../types';
+import { ObjectList } from '.';
 
 const getObjectList = (store: AppState): ObjectList => store.objectList;
 
