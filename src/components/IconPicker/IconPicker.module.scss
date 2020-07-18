@@ -1,0 +1,28 @@
+@import '../../sass/variables.scss';
+
+.container {
+  margin-bottom: 10px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  flex-grow: 1;
+}
+
+.title {
+  margin: 5px;
+}
+
+.iconPicker {
+  display: block;
+  padding: 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+  border: 1px solid $color-border-picker;
+  outline-color: $color-border-picker;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+@import '../../../../sass/variables.scss';
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+
+  width: 50px;
+  height: 50px;
+
+  outline-color: $color-border-picker;
+}
+.img {
+  width: 40px;
+  height: 40px;
+}
+
+.item:hover .img {
+  transform: scale(1.2);
+}

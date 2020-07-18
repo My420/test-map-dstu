@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 200px;
+  list-style: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}

@@ -10,8 +10,9 @@ import { Icon, Style } from 'ol/style';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 import { Coordinate } from 'ol/coordinate';
-import MarkerData from './types';
-import markerIcon from './marker.png';
+import { ICON_SIZE, ICON_SCALE } from './constant';
+import { MarkerData } from './types';
+import MarkerIcon from './icons';
 
 // Spherical Mercator (EPSG:3857)
 
@@ -83,9 +84,10 @@ class MapServices {
         source: new VectorSource(),
         style: new Style({
           image: new Icon({
-            anchor: [0.5, 1],
-            src: markerIcon,
-            imgSize: [48, 48],
+            anchor: [0.5, 0.5],
+            src: MarkerIcon.placeholder,
+            imgSize: [ICON_SIZE, ICON_SIZE],
+            scale: ICON_SCALE,
           }),
         }),
       });
@@ -98,7 +100,7 @@ class MapServices {
       this.popup = new Overlay({
         element: popup,
         stopEvent: false,
-        offset: [0, -50],
+        offset: [0, -20],
       });
     }
   }

@@ -4,6 +4,7 @@ import { Store } from 'antd/lib/form/interface';
 import { ObjectFormData } from '../../types';
 import styles from './ObjectForm.module.scss';
 import generateID from '../../utils/generateID';
+import IconPicker from '../IconPicker';
 
 export interface ObjectFormProps {
   coords: number[];
@@ -30,6 +31,7 @@ const ObjectForm: React.FC<ObjectFormProps> = ({ coords, onSubmit }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Добавить метку на карту:</h2>
+      <IconPicker />
       <Form layout="vertical" name="userObject" onFinish={onFinish}>
         <Form.Item
           label="Название:"
