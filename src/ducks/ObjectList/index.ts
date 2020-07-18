@@ -1,4 +1,5 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { MarkerIconName, IconScaleValue } from '../../services/Map/types';
 import mapService from '../../services/Map';
 
 // constant
@@ -14,6 +15,8 @@ export interface ObjectListItem {
   description: string;
   lon: number;
   lat: number;
+  iconName: MarkerIconName;
+  iconScale: IconScaleValue;
 }
 
 export type ObjectList = ObjectListItem[];

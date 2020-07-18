@@ -1,4 +1,5 @@
 import { SORT_VALUE_NONE, SORT_VALUE_ASCENDING, SORT_VALUE_DESCENDING } from '../utils/constant';
+import { MarkerIconName, IconScaleValue } from '../services/Map/types';
 
 export interface ObjectFormData {
   id: string;
@@ -6,6 +7,8 @@ export interface ObjectFormData {
   description: string;
   lon: number;
   lat: number;
+  iconName: MarkerIconName;
+  iconScale: IconScaleValue;
 }
 
 export interface ObjectListItem {
@@ -14,6 +17,8 @@ export interface ObjectListItem {
   description: string;
   lon: number;
   lat: number;
+  iconName: MarkerIconName;
+  iconScale: IconScaleValue;
 }
 
 export type ObjectList = ObjectListItem[];

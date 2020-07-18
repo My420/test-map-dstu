@@ -11,7 +11,7 @@ import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 import { Coordinate } from 'ol/coordinate';
 import { ICON_SIZE, ICON_SCALE } from './constant';
-import { MarkerData } from './types';
+import { MarkerData, MarkerIconName, IconScaleValue } from './types';
 import MarkerIcon from './icons';
 
 // Spherical Mercator (EPSG:3857)
@@ -50,12 +50,27 @@ class MapServices {
 
   private mapMoveSubscribers: MapMoveSubscriber[] = [];
 
+  static createMarkerStyle(iconName: MarkerIconName, iconScale: IconScaleValue) {
+    return new Style({
+      image: new Icon({
+        anchor: [0.5, 0.5],
+        src: MarkerIcon[iconName],
+        imgSize: [ICON_SIZE, ICON_SIZE],
+        scale: iconScale,
+      }),
+    });
+  }
+
   static createMarker(data: MarkerData) {
-    const { lon, lat } = data;
+    const {
+      lon, lat, id, iconName, iconScale,
+    } = data;
     const feature = new Feature({
       geometry: new Point([lon, lat]),
     });
-    feature.setId(data.id);
+    feature.setId(id);
+    const style = MapServices.createMarkerStyle(iconName, iconScale);
+    feature.setStyle(style);
     return feature;
   }
 

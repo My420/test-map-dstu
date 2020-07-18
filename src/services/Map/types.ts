@@ -4,6 +4,8 @@ export interface MarkerData {
   description: string;
   lon: number;
   lat: number;
+  iconName: MarkerIconName;
+  iconScale: IconScaleValue;
 }
 
 export interface IMarkerIcon {

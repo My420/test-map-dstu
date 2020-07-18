@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import MarkerPopup from '../../components/MarkerPopup';
 import getObjectList from '../../ducks/ObjectList/selector';
 import findItemInList from '../../utils/findItemInList';
+import { ObjectListItem } from '../../types';
 
 export interface MarkerPopupContainerProps {
   isOpen: boolean;
@@ -10,12 +11,14 @@ export interface MarkerPopupContainerProps {
   onClose: () => void;
 }
 
-const emptyMock = {
+const emptyMock: ObjectListItem = {
   title: 'Ошибка',
   description: 'Такого маркера нет в списке!',
   lon: 0,
   lat: 0,
   id: 'errorID',
+  iconName: 'question',
+  iconScale: 0.7,
 };
 
 const MarkerPopupContainer: React.FC<MarkerPopupContainerProps> = ({
