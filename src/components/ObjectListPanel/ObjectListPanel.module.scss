@@ -1,10 +1,46 @@
 @import '../../sass/variables.scss';
 
 .container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
   position: absolute;
-  top: 10px;
+  top: 40px;
   right: 10px;
-  width: 300px;
-  height: 500px;
+
+  width: 350px;
+  height: 90%;
+
+  padding: 20px 20px;
+
   background-color: $color-bg-main;
+  @media (max-width: $Mobile-max-width) {
+    & {
+      width: 80%;
+      top: 0;
+      right: 0px;
+      height: 100%;
+    }
+  }
+}
+
+.controls {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+  @media (max-width: $Mobile-max-width) {
+    & {
+      top: 80px;
+      right: 89%;
+    }
+  }
+}
+
+.filter {
+  margin-bottom: 10px;
+}
+.list {
+  overflow: auto;
 }

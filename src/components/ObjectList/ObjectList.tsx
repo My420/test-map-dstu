@@ -15,11 +15,15 @@ const ObjectList: React.FC<ObjectListProps> = ({ data, isSearchActive }) => {
   return (
     <ul className={styles.list}>
       {isEmpty && (
-        <Empty
-          description={
-            <span className={styles.emptyDescription}>Нажмите на карту, чтобы добавить метку.</span>
-          }
-        />
+        <div className={styles.empty}>
+          <Empty
+            description={(
+              <span className={styles.emptyDescription}>
+                Нажмите на карту, чтобы добавить метку.
+              </span>
+            )}
+          />
+        </div>
       )}
       {!isEmpty
         && data.map((elem) => (
