@@ -71,9 +71,11 @@ const ObjectForm: React.FC<ObjectFormProps> = ({ coords, onSubmit }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <div className={styles.controls}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

@@ -1,3 +1,5 @@
+@import '../../sass/variables.scss';
+
 .container {
   position: fixed;
   display: flex;
@@ -6,6 +8,9 @@
 
   width: 100vw;
   height: 100vh;
+
+  background-color: $color-bg-modal;
+  z-index: $z-index-modal;
 }
 
 .wrapper {
@@ -16,4 +21,11 @@
   position: absolute;
   top: -7%;
   right: -7%;
+  @media (max-width: $Mobile-max-width) {
+    & {
+      left: auto;
+      top: -20px;
+      right: 0px;
+    }
+  }
 }

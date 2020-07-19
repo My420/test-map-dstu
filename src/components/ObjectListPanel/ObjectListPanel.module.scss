@@ -8,6 +8,7 @@
   position: absolute;
   top: 40px;
   right: 10px;
+  z-index: $z-index-menu;
 
   width: 350px;
   height: 90%;
@@ -29,11 +30,12 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  z-index: 10;
+  z-index: $z-index-menu;
   @media (max-width: $Mobile-max-width) {
     & {
-      top: 80px;
-      right: 89%;
+      top: 70px;
+      right: auto;
+      left: 5px;
     }
   }
 }

@@ -1,13 +1,24 @@
 @import '../../sass/variables.scss';
 
 .container {
-  width: 400px;
+  width: 390px;
   padding: 20px;
 
   background-color: $color-bg-main;
+  @media (max-width: $Mobile-max-width) {
+    & {
+      width: 300px;
+    }
+  }
 }
 
 .title {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
