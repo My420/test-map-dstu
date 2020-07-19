@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 import styles from './ModalWindow.module.scss';
 
 export interface ModalWindowProps {
@@ -14,9 +15,13 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ children, isOpen, onClose }) 
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.buttonContainer}>
-            <Button type="primary" shape="circle" size="large" onClick={onClose}>
-              X
-            </Button>
+            <Button
+              type="primary"
+              shape="circle"
+              size="large"
+              onClick={onClose}
+              icon={<CloseOutlined />}
+            />
           </div>
           <div className={styles.content}>{children}</div>
         </div>

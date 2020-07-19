@@ -1,5 +1,6 @@
 import React from 'react';
 import { Popover, Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 import { POPUP_ID } from '../../utils/constant';
 import { ObjectListItem } from '../../types';
 
@@ -16,11 +17,14 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({ isOpen, data, onClose }) => {
 
   const content = (
     <div>
-      <p>{title}</p>
       <p>{description}</p>
-      <Button type="link" onClick={() => onClose()}>
-        Close
-      </Button>
+      <Button
+        shape="circle"
+        type="primary"
+        size="small"
+        onClick={() => onClose()}
+        icon={<CloseOutlined />}
+      />
     </div>
   );
 
