@@ -16,6 +16,7 @@
   padding: 20px 20px;
 
   background-color: $color-bg-main;
+
   @media (max-width: $Mobile-max-width) {
     & {
       width: 80%;

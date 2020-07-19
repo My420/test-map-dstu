@@ -25,9 +25,6 @@ const IconPicker: React.FC<IconPickerProps> = ({
   console.log('Icon Picker');
 
   const [isOpen, toggleIsOpen] = useToggle(false);
-  /* const [iconName, setIconName] = useState<MarkerIconName>('placeholder');
-  const [iconScale, setIconScale] = useState<IconScaleValue>(ICON_SCALE);
- */
 
   const handleIconChange = useCallback(
     (name: MarkerIconName) => {

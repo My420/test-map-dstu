@@ -15,6 +15,7 @@
 
 .wrapper {
   position: relative;
+  animation: scale 200ms linear;
 }
 
 .buttonContainer {
@@ -27,5 +28,15 @@
       top: -20px;
       right: 0px;
     }
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
   }
 }

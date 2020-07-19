@@ -18,6 +18,9 @@ import MarkerIcon from './icons';
 
 // constant
 const DSTU_COORDS = fromLonLat([39.710887, 47.239992]);
+const ZOOM = 17;
+const MAX_ZOOM = 20;
+const MIN_ZOOM = 0;
 
 // types
 
@@ -78,7 +81,9 @@ class MapServices {
     if (!this.map && !this.view) {
       this.view = new View({
         center: DSTU_COORDS,
-        zoom: 17,
+        zoom: ZOOM,
+        minZoom: MIN_ZOOM,
+        maxZoom: MAX_ZOOM,
       });
 
       this.map = new Map({
