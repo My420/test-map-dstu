@@ -1,0 +1,16 @@
+@import '../../sass/variables.scss';
+
+.container {
+  position: absolute;
+  top: 8px;
+  right: 45px;
+  z-index: $z-index-controls;
+
+  @media (max-width: $Mobile-max-width) {
+    & {
+      top: 120px;
+      right: auto;
+      left: 8px;
+    }
+  }
+}

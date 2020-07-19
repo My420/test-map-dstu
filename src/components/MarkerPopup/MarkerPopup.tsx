@@ -11,7 +11,7 @@ export interface MarkerPopupProps {
 }
 
 const MarkerPopup: React.FC<MarkerPopupProps> = ({ isOpen, data, onClose }) => {
-  console.log('Marker Popup', isOpen, data);
+  console.log('Marker Popup');
 
   const { title, description } = data;
 

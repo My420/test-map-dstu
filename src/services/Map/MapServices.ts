@@ -13,6 +13,7 @@ import { Coordinate } from 'ol/coordinate';
 import { ICON_SIZE, ICON_SCALE } from './constant';
 import { MarkerData, MarkerIconName, IconScaleValue } from './types';
 import MarkerIcon from './icons';
+import calcNormalizeScale from './utils';
 
 // Spherical Mercator (EPSG:3857)
 
@@ -37,6 +38,8 @@ interface MapMoveSubscriber {
 }
 
 class MapServices {
+  private isIconsNormalize: boolean = false;
+
   private popupId: string = '';
 
   private view: View | null = null;
@@ -53,18 +56,22 @@ class MapServices {
 
   private mapMoveSubscribers: MapMoveSubscriber[] = [];
 
-  static createMarkerStyle(iconName: MarkerIconName, iconScale: IconScaleValue) {
+  private createMarkerStyle(
+    iconName: MarkerIconName,
+    iconScale: IconScaleValue,
+    resolution: number,
+  ) {
     return new Style({
       image: new Icon({
         anchor: [0.5, 0.5],
         src: MarkerIcon[iconName],
         imgSize: [ICON_SIZE, ICON_SIZE],
-        scale: iconScale,
+        scale: this.isIconsNormalize ? calcNormalizeScale(iconScale, resolution) : iconScale,
       }),
     });
   }
 
-  static createMarker(data: MarkerData) {
+  private createMarker(data: MarkerData) {
     const {
       lon, lat, id, iconName, iconScale,
     } = data;
@@ -72,8 +79,10 @@ class MapServices {
       geometry: new Point([lon, lat]),
     });
     feature.setId(id);
-    const style = MapServices.createMarkerStyle(iconName, iconScale);
-    feature.setStyle(style);
+    feature.setStyle((_elem, resolution) => {
+      const style = this.createMarkerStyle(iconName, iconScale, resolution);
+      return style;
+    });
     return feature;
   }
 
@@ -204,7 +213,7 @@ class MapServices {
   }
 
   addMarker(data: MarkerData) {
-    const marker = MapServices.createMarker(data);
+    const marker = this.createMarker(data);
     this.markerLayer?.getSource().addFeature(marker);
   }
 
@@ -219,6 +228,15 @@ class MapServices {
       this.notifyOnMarkerClickSubscribers(id);
       clearTimeout(timeoutId);
     }, time + 100);
+  }
+
+  setNormalizeValue(value: boolean) {
+    this.isIconsNormalize = value;
+    this.markerLayer?.getSource().changed();
+  }
+
+  getNormalizeValue(): boolean {
+    return this.isIconsNormalize;
   }
 
   init(id: string, popupId: string): void {
