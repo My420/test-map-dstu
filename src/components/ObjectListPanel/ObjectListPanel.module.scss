@@ -33,9 +33,9 @@
   z-index: $z-index-menu;
   @media (max-width: $Mobile-max-width) {
     & {
-      top: 70px;
+      top: 80px;
       right: auto;
-      left: 5px;
+      left: 8px;
     }
   }
 }

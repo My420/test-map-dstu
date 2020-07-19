@@ -1,5 +1,5 @@
 import React from 'react';
-import ScreenContainer from '../../containers/ScreenContainer';
+import Screen from '../Screen';
 import styles from './App.module.scss';
 
 const App: React.FC = () => (
@@ -8,7 +8,7 @@ const App: React.FC = () => (
       <h1 className="visually-hidden">Карта парка ДГТУ</h1>
     </header>
     <main className={styles.main}>
-      <ScreenContainer />
+      <Screen />
     </main>
     <footer />
   </div>
