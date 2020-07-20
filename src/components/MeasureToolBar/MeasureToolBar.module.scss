@@ -1,0 +1,14 @@
+@import '../../sass/variables.scss';
+
+.container {
+  position: absolute;
+  top: 200px;
+  left: 8px;
+  z-index: $z-index-measure;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 80px;
+}

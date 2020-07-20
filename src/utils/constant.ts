@@ -6,3 +6,6 @@ export const SORT_VALUE_DESCENDING = 'S_DES';
 
 export const MAP_ID = 'map';
 export const POPUP_ID = 'popup';
+
+export const TOOLTIP_MEASURE_ID = 'measure';
+export const TOOLTIP_HELPER_ID = 'measureHelper';

@@ -27,3 +27,5 @@ export type SortValue =
   | typeof SORT_VALUE_NONE
   | typeof SORT_VALUE_ASCENDING
   | typeof SORT_VALUE_DESCENDING;
+
+export type MeasurementType = 'POLYGON' | 'LINE_STRING';

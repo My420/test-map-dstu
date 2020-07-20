@@ -5,15 +5,22 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import Draw from 'ol/interaction/Draw';
 import Overlay from 'ol/Overlay';
-import { Icon, Style } from 'ol/style';
+import {
+  Circle as CircleStyle, Icon, Style, Fill, Stroke,
+} from 'ol/style';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 import { Coordinate } from 'ol/coordinate';
+import GeometryType from 'ol/geom/GeometryType';
+import LineString from 'ol/geom/LineString';
+import Polygon from 'ol/geom/Polygon';
 import { ICON_SIZE, ICON_SCALE } from './constant';
 import { MarkerData, MarkerIconName, IconScaleValue } from './types';
 import MarkerIcon from './icons';
-import calcNormalizeScale from './utils';
+import { calcNormalizeScale, formatLength, formatArea } from './utils';
+import olExt from './olExt';
 
 // Spherical Mercator (EPSG:3857)
 
@@ -24,6 +31,8 @@ const MAX_ZOOM = 20;
 const MIN_ZOOM = 0;
 
 // types
+
+type MeasurementType = 'POLYGON' | 'LINE_STRING';
 
 interface ClickOnMapSubscriber {
   (coords: Coordinate): any;
@@ -42,11 +51,15 @@ class MapServices {
 
   private popupId: string = '';
 
+  private measureTooltip: olExt.Tooltip | null = null;
+
   private view: View | null = null;
 
   private map: Map | null = null;
 
   private markerLayer: VectorLayer | null = null;
+
+  private drawInteraction: Draw | null = null;
 
   private popup: Overlay | null = null;
 
@@ -118,6 +131,13 @@ class MapServices {
             imgSize: [ICON_SIZE, ICON_SIZE],
             scale: ICON_SCALE,
           }),
+          fill: new Fill({
+            color: 'rgba(255, 255, 255, 0.2)',
+          }),
+          stroke: new Stroke({
+            color: '#ffcc33',
+            width: 2,
+          }),
         }),
       });
     }
@@ -134,6 +154,14 @@ class MapServices {
     }
   }
 
+  private addMeasureTooltip(): void {
+    if (this.measureTooltip && this.map) this.map.addOverlay(this.measureTooltip);
+  }
+
+  private createMeasureTooltip() {
+    if (!this.measureTooltip) this.measureTooltip = olExt.createTooltip();
+  }
+
   private addPopup(): void {
     if (this.map && this.popup) {
       this.map.addOverlay(this.popup);
@@ -143,6 +171,43 @@ class MapServices {
   private addLayers(): void {
     if (this.map && this.markerLayer) {
       this.map.addLayer(this.markerLayer);
+    }
+  }
+
+  private createDrawInteraction(type: MeasurementType) {
+    if (this.map && this.markerLayer) {
+      this.drawInteraction = new Draw({
+        source: this.markerLayer.getSource(),
+        stopClick: true,
+        type: GeometryType[type],
+        style: new Style({
+          fill: new Fill({
+            color: 'rgba(255, 255, 255, 0.2)',
+          }),
+          stroke: new Stroke({
+            color: 'rgba(0, 0, 0, 0.5)',
+            lineDash: [10, 10],
+            width: 2,
+          }),
+          image: new CircleStyle({
+            radius: 5,
+            stroke: new Stroke({
+              color: 'rgba(0, 0, 0, 0.7)',
+            }),
+            fill: new Fill({
+              color: 'rgba(255, 255, 255, 0.2)',
+            }),
+          }),
+        }),
+      });
+      this.map.addInteraction(this.drawInteraction);
+    }
+  }
+
+  private removeDrawInteraction() {
+    if (this.drawInteraction && this.map) {
+      this.map.removeInteraction(this.drawInteraction);
+      this.drawInteraction = null;
     }
   }
 
@@ -181,6 +246,23 @@ class MapServices {
 
   private notifyMapMoveSubscribers() {
     this.mapMoveSubscribers.forEach((subs) => subs());
+  }
+
+  private bindMeasureListeners() {
+    if (this.drawInteraction) {
+      this.drawInteraction.on('drawstart', (evt) => {
+        this.measureTooltip?.setFeature(evt);
+      });
+
+      this.drawInteraction.on('drawend', (evt) => {
+        this.measureTooltip?.removeFeature(evt);
+        const geom = evt.feature.getGeometry();
+        let measure = '';
+        if (geom instanceof LineString) measure = formatLength(geom);
+        if (geom instanceof Polygon) measure = formatArea(geom);
+        console.log('оповестить подписчиков:  длина = ', measure);
+      });
+    }
   }
 
   private bind(): void {
@@ -239,14 +321,25 @@ class MapServices {
     return this.isIconsNormalize;
   }
 
+  startMeasurement(type: MeasurementType) {
+    this.createDrawInteraction(type);
+    this.bindMeasureListeners();
+  }
+
+  stopMeasurement() {
+    this.removeDrawInteraction();
+  }
+
   init(id: string, popupId: string): void {
     this.popupId = popupId;
     if (!this.map) {
       this.createMapWithView(id);
       this.createMarkersLayer();
       this.createPopup();
+      this.createMeasureTooltip();
       this.addLayers();
       this.addPopup();
+      this.addMeasureTooltip();
       this.bind();
     }
   }
