@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Button, Tooltip } from 'antd';
-import { LineOutlined, PlusSquareOutlined } from '@ant-design/icons';
+import { LineOutlined, BorderOutlined } from '@ant-design/icons';
 import styles from './MeasureToolBar.module.scss';
 
 export interface MeasureToolBarProps {
@@ -42,7 +42,8 @@ const MeasureToolBar: React.FC<MeasureToolBarProps> = ({
         <Button
           type="primary"
           shape="circle"
-          icon={<PlusSquareOutlined onClick={handlePolygonClick} />}
+          icon={<BorderOutlined />}
+          onClick={handlePolygonClick}
           danger={isPolygonActive}
         />
       </Tooltip>

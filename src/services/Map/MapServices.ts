@@ -16,11 +16,13 @@ import { Coordinate } from 'ol/coordinate';
 import GeometryType from 'ol/geom/GeometryType';
 import LineString from 'ol/geom/LineString';
 import Polygon from 'ol/geom/Polygon';
+import OverlayPositioning from 'ol/OverlayPositioning';
 import { ICON_SIZE, ICON_SCALE } from './constant';
 import { MarkerData, MarkerIconName, IconScaleValue } from './types';
 import MarkerIcon from './icons';
 import { calcNormalizeScale, formatLength, formatArea } from './utils';
 import olExt from './olExt';
+import styles from './styles.module.scss';
 
 // Spherical Mercator (EPSG:3857)
 
@@ -33,6 +35,12 @@ const MIN_ZOOM = 0;
 // types
 
 type MeasurementType = 'POLYGON' | 'LINE_STRING';
+
+interface MeasureData {
+  type: MeasurementType;
+  id: string;
+  value: string;
+}
 
 interface ClickOnMapSubscriber {
   (coords: Coordinate): any;
@@ -135,7 +143,7 @@ class MapServices {
             color: 'rgba(255, 255, 255, 0.2)',
           }),
           stroke: new Stroke({
-            color: '#ffcc33',
+            color: '#1890ff',
             width: 2,
           }),
         }),
@@ -152,6 +160,20 @@ class MapServices {
         offset: [0, -20],
       });
     }
+  }
+
+  private setMeasureOverlay(id: string, coords: Coordinate, value: string) {
+    const tooltip = document.createElement('div');
+    tooltip.innerHTML = value;
+    tooltip.className = styles.measureOverlay;
+    const measureOverlay = new Overlay({
+      element: tooltip,
+      offset: [0, -15],
+      positioning: OverlayPositioning.BOTTOM_CENTER,
+      id,
+    });
+    measureOverlay.setPosition(coords);
+    this.map?.addOverlay(measureOverlay);
   }
 
   private addMeasureTooltip(): void {
@@ -185,14 +207,14 @@ class MapServices {
             color: 'rgba(255, 255, 255, 0.2)',
           }),
           stroke: new Stroke({
-            color: 'rgba(0, 0, 0, 0.5)',
+            color: '#ff4d4f',
             lineDash: [10, 10],
             width: 2,
           }),
           image: new CircleStyle({
             radius: 5,
             stroke: new Stroke({
-              color: 'rgba(0, 0, 0, 0.7)',
+              color: '#ff4d4f',
             }),
             fill: new Fill({
               color: 'rgba(255, 255, 255, 0.2)',
@@ -248,6 +270,11 @@ class MapServices {
     this.mapMoveSubscribers.forEach((subs) => subs());
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  private notifyMeasureSubscribers(data: MeasureData): void {
+    console.log('Результаты измерения: ', data);
+  }
+
   private bindMeasureListeners() {
     if (this.drawInteraction) {
       this.drawInteraction.on('drawstart', (evt) => {
@@ -258,9 +285,20 @@ class MapServices {
         this.measureTooltip?.removeFeature(evt);
         const geom = evt.feature.getGeometry();
         let measure = '';
-        if (geom instanceof LineString) measure = formatLength(geom);
-        if (geom instanceof Polygon) measure = formatArea(geom);
-        console.log('оповестить подписчиков:  длина = ', measure);
+        let overlayCoords = [0, 0];
+        let measureType: MeasurementType = 'LINE_STRING';
+        if (geom instanceof LineString) {
+          overlayCoords = geom.getLastCoordinate();
+          measure = formatLength(geom);
+        }
+        if (geom instanceof Polygon) {
+          overlayCoords = geom.getInteriorPoint().getCoordinates();
+          measure = formatArea(geom);
+          measureType = 'POLYGON';
+        }
+        const overlayId = overlayCoords[0].toString();
+        this.setMeasureOverlay(overlayId, overlayCoords, measure);
+        this.notifyMeasureSubscribers({ type: measureType, id: overlayId, value: measure });
       });
     }
   }
