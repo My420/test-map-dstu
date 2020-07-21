@@ -16,8 +16,6 @@ const MeasureToolBar: React.FC<MeasureToolBarProps> = ({
   onLineBtnClick,
   onPolygonBtnClick,
 }) => {
-  console.log('Measure Tool Bar');
-
   const handleLineClick = useCallback(() => onLineBtnClick(), [onLineBtnClick]);
   const handlePolygonClick = useCallback(() => onPolygonBtnClick(), [onPolygonBtnClick]);
 

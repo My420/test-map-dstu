@@ -10,7 +10,6 @@ const Map: React.FC<MapProps> = () => {
     mapService.init(MAP_ID, POPUP_ID);
   });
 
-  console.log('--------> map!');
   return <div id={MAP_ID} className={styles.map} />;
 };
 

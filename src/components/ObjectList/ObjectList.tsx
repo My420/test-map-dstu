@@ -10,7 +10,6 @@ export interface ObjectListProps {
 }
 
 const ObjectList: React.FC<ObjectListProps> = ({ data, isSearchActive }) => {
-  console.log('Object List ');
   const isEmpty = data.length === 0;
   return (
     <ul className={styles.list}>

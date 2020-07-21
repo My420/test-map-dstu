@@ -10,7 +10,6 @@ export interface SearchListItemProps {
 }
 
 const SearchListItem: React.FC<SearchListItemProps> = ({ data }) => {
-  console.log('Object List Item');
   const { title, description, iconName } = data;
   const [prev, mark, next] = title.split(SEARCH_MARK);
   return (

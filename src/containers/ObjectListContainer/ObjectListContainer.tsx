@@ -28,7 +28,6 @@ const ObjectListContainer: React.FC<ObjectListContainerProps> = () => {
     setSortValue(value);
   }, []);
 
-  console.log('Object List Conteiner');
   return (
     <ObjectListPanel
       isPanelOpen={isPanelOpen}

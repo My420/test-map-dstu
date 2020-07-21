@@ -19,8 +19,6 @@ const emptyMock: ObjectListItem = {
 };
 
 const MarkerPopupContainer: React.FC<MarkerPopupContainerProps> = () => {
-  console.log('Marker Popup Container');
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [markerId, setMarkerId] = useState('');
   const objectList = useSelector(getObjectList);

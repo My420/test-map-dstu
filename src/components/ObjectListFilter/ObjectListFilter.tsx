@@ -15,23 +15,19 @@ const ObjectListFilter: React.FC<ObjectListFilterProps> = ({
   sortValue,
   onSearch,
   onSortChange,
-}) => {
-  console.log('Object LIst FIlter');
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.search}>
-        <Input.Search placeholder="поиск..." onSearch={onSearch} enterButton />
-      </div>
-      <div className={styles.sort}>
-        <Radio.Group onChange={onSortChange} value={sortValue} buttonStyle="solid">
-          <Radio.Button value={SORT_VALUE_NONE}>нет</Radio.Button>
-          <Radio.Button value={SORT_VALUE_ASCENDING}>а-я</Radio.Button>
-          <Radio.Button value={SORT_VALUE_DESCENDING}>я-а</Radio.Button>
-        </Radio.Group>
-      </div>
+}) => (
+  <div className={styles.container}>
+    <div className={styles.search}>
+      <Input.Search placeholder="поиск..." onSearch={onSearch} enterButton />
     </div>
-  );
-};
+    <div className={styles.sort}>
+      <Radio.Group onChange={onSortChange} value={sortValue} buttonStyle="solid">
+        <Radio.Button value={SORT_VALUE_NONE}>нет</Radio.Button>
+        <Radio.Button value={SORT_VALUE_ASCENDING}>а-я</Radio.Button>
+        <Radio.Button value={SORT_VALUE_DESCENDING}>я-а</Radio.Button>
+      </Radio.Group>
+    </div>
+  </div>
+);
 
 export default ObjectListFilter;

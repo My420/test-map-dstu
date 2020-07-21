@@ -5,8 +5,6 @@ import MapServices from '../../services/Map';
 export interface ControlsContainerProps {}
 
 const ControlsContainer: React.FC<ControlsContainerProps> = () => {
-  console.log('Controls Container');
-
   const [isIconNormalize, setNormalizeStatus] = useState(MapServices.getNormalizeValue());
 
   const handleClick = useCallback(() => {

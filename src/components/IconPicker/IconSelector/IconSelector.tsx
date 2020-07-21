@@ -12,7 +12,6 @@ export interface IconSelectorProps {
 }
 
 const IconSelector: React.FC<IconSelectorProps> = ({ onChange, onClose }) => {
-  console.log('Icon Selector');
   const names = Object.keys(MarkerIcon) as MarkerIconName[];
 
   return (

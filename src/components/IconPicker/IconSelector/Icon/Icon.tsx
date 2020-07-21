@@ -9,8 +9,6 @@ export interface IconProps {
 }
 
 const Icon: React.FC<IconProps> = ({ name, src, onClick }) => {
-  console.log('Icon');
-
   const handleClick = () => onClick(name);
 
   return (

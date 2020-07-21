@@ -14,8 +14,6 @@ export interface ObjectFormProps {
 }
 
 const ObjectForm: React.FC<ObjectFormProps> = ({ coords, onSubmit }) => {
-  console.log('object form');
-
   const [iconName, setIconName] = useState<MarkerIconName>('placeholder');
   const [iconScale, setIconScale] = useState<IconScaleValue>(ICON_SCALE);
 

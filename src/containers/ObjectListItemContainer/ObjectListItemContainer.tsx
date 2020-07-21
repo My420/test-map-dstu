@@ -13,8 +13,6 @@ const ObjectListItemContainer: React.FC<ObjectListItemContainerProps> = ({
   data,
   isSearchActive,
 }) => {
-  console.log('Object List Item Container');
-
   const { id, lon, lat } = data;
 
   const handleClick = useCallback(

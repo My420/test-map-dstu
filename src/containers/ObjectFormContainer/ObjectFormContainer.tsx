@@ -11,8 +11,6 @@ import ModalWindow from '../../components/ModalWindow';
 export interface FormContainerProps {}
 
 const ObjectFormContainer: React.FC<FormContainerProps> = () => {
-  console.log('OFormContainer');
-
   const [isModalOpen, toggleModal] = useToggle(false);
   const [coords, setCoordsState] = useState([0, 0]);
 

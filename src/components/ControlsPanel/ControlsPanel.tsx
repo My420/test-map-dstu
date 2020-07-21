@@ -8,8 +8,6 @@ export interface ControlsPanelProps {
 }
 
 const ControlsPanel: React.FC<ControlsPanelProps> = ({ isIconNormalize, onNormalizeClick }) => {
-  console.log('Controls Panel');
-
   const onText = 'Включить нормализацию иконок';
   const offText = 'Выключить нормализацию иконок';
 

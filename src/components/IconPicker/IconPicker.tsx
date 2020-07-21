@@ -22,8 +22,6 @@ export interface IconPickerProps {
 const IconPicker: React.FC<IconPickerProps> = ({
   icon, scale, onIconChange, onScaleChange,
 }) => {
-  console.log('Icon Picker');
-
   const [isOpen, toggleIsOpen] = useToggle(false);
 
   const handleIconChange = useCallback(
